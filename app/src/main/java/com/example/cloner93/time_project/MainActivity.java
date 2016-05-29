@@ -12,9 +12,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TabHost;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TabHost tabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,35 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        //معرفی تب هاست
+        tabHost=(TabHost)findViewById(R.id.tabHost);
+        tabHost.setup();
+
+//ایجاد تب شماره یک
+        TabHost.TabSpec spec1=tabHost.newTabSpec("TAB 1");
+//دریافت لایه تب
+        spec1.setContent(R.id.tab2);
+//نام تب
+        spec1.setIndicator("Appinapps");
+
+
+//ایجاد تب شماره دو
+        TabHost.TabSpec spec2=tabHost.newTabSpec("TAB 2");
+        spec2.setIndicator("Google");
+        spec2.setContent(R.id.tab2);
+
+
+//ایجاد تب شماره سه
+        TabHost.TabSpec spec3=tabHost.newTabSpec("TAB 3");
+        spec3.setContent(R.id.tab3);
+        spec3.setIndicator("Android");
+
+//افزودن تب ها به تب هاست جهت نمایش
+        tabHost.addTab(spec1);
+        tabHost.addTab(spec2);
+        tabHost.addTab(spec3);
     }
 
     @Override
