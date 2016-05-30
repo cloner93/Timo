@@ -4,43 +4,42 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Add_plan_Activity extends AppCompatActivity {
-        SeekBar seekBar;
-    TextView textView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plan);
-        seekBar=(SeekBar)findViewById(R.id.seekBar);
-        textView=(TextView)findViewById(R.id.textView2);
 
-
+        final TextView textView=(TextView) findViewById(R.id.textView2);
+        final TextView textView3=(TextView) findViewById(R.id.textView3);
+        final SeekBar seekBar=(SeekBar) findViewById(R.id.seekBar);
+        textView.setText(seekBar.getProgress() + "/" + seekBar.getMax());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progress = 0;
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
                 progress = progresValue;
-
-                //Toast.makeText(getApplicationContext(), "Changing seekbar's progress", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                //Toast.makeText(getApplicationContext(), "Started tracking seekbar", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
                 textView.setText(progress + "/" + seekBar.getMax());
-                //textView.setText(progress);
-                //Toast.makeText(getApplicationContext(), "Stopped tracking seekbar", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar  ) {
+                textView.setText(progress + "/" + seekBar.getMax());
+                textView3.setText(String.valueOf(progress));
+
             }
         });
+        //String seekBarValue= (String) textView3.getText();  get seekbar value
 
     }
 
@@ -63,6 +62,7 @@ public class Add_plan_Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_plan) {
+            Toast.makeText(Add_plan_Activity.this, "OK", Toast.LENGTH_SHORT).show();
             return true;
         }
 

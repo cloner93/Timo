@@ -15,7 +15,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text=""
+        android:hint="Name"
         android:ems="10"
         android:id="@+id/editText"
         android:layout_gravity="center_horizontal|top"
@@ -53,8 +54,10 @@
         android:text="Active"
         android:id="@+id/checkBox"
         android:checked="false"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/seekBar"
+        android:layout_alignLeft="@+id/seekBar"
+        android:layout_alignStart="@+id/seekBar"
+        android:layout_marginTop="129dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -66,5 +69,15 @@
         android:layout_below="@+id/checkBox"
         android:layout_alignLeft="@+id/checkBox"
         android:layout_alignStart="@+id/checkBox" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textView3"
+        android:visibility="invisible"
+        android:layout_below="@+id/seekBar"
+        android:layout_toRightOf="@+id/checkBox"
+        android:layout_toEndOf="@+id/checkBox" />
 
 </RelativeLayout>
