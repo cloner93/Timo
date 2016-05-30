@@ -1,5 +1,8 @@
 package com.example.cloner93.time_project;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,33 +48,23 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //معرفی تب هاست
-        tabHost=(TabHost)findViewById(R.id.tabHost);
-        tabHost.setup();
 
-//ایجاد تب شماره یک
-        TabHost.TabSpec spec1=tabHost.newTabSpec("TAB 1");
-//دریافت لایه تب
-        spec1.setContent(R.id.tab2);
-//نام تب
-        spec1.setIndicator("Appinapps");
+    }
+    public void selectFrag(View view) {
+        Fragment fr;
 
+        if(view == findViewById(R.id.nav_camera)) {
+            fr = new FragmentTwo();
 
-//ایجاد تب شماره دو
-        TabHost.TabSpec spec2=tabHost.newTabSpec("TAB 2");
-        spec2.setIndicator("Google");
-        spec2.setContent(R.id.tab2);
+        }else {
+            fr = new FragmentOne();
+        }
 
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_place, fr);
+        fragmentTransaction.commit();
 
-//ایجاد تب شماره سه
-        TabHost.TabSpec spec3=tabHost.newTabSpec("TAB 3");
-        spec3.setContent(R.id.tab3);
-        spec3.setIndicator("Android");
-
-//افزودن تب ها به تب هاست جهت نمایش
-        tabHost.addTab(spec1);
-        tabHost.addTab(spec2);
-        tabHost.addTab(spec3);
     }
 
     @Override
