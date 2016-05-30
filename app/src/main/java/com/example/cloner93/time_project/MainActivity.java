@@ -3,6 +3,7 @@ package com.example.cloner93.time_project;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,13 +16,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TabHost;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TabHost tabHost;
-
+    Button btn_home;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +31,13 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        assert fab != null;
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Intent intent=new Intent(getApplicationContext(),Add_plan_Activity.class);
+                startActivity(intent);
             }
         });
 
@@ -51,13 +54,14 @@ public class MainActivity extends AppCompatActivity
 
     }
     public void selectFrag(View view) {
-        Fragment fr;
+
+          Fragment fr = null;
 
         if(view == findViewById(R.id.nav_camera)) {
-            fr = new FragmentTwo();
-
-        }else {
             fr = new FragmentOne();
+
+        }else if(view ==findViewById(R.id.nav_gallery)) {
+            fr = new FragmentTwo();
         }
 
         FragmentManager fm = getFragmentManager();
@@ -107,6 +111,7 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

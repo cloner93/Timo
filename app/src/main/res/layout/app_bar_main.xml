@@ -5,6 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+
+
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -29,13 +31,6 @@
 
     <include layout="@layout/content_main" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
 
 
     <fragment
@@ -44,7 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.example.cloner93.time_project.FragmentOne"
-         />
+        tools:layout="@layout/fragment_one" />
+
 </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>
