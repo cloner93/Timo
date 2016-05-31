@@ -6,17 +6,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Add_plan_Activity extends AppCompatActivity {
 
+    Db db;
+    EditText editText;
+    CheckBox checkBox1;
+    CheckBox checkBox2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plan);
 
+        db =new Db(this);
+        checkBox1=(CheckBox)findViewById(R.id.checkBox);
+        checkBox2=(CheckBox)findViewById(R.id.checkBox2);
+        editText =(EditText) findViewById(R.id.editText);
         final TextView textView=(TextView) findViewById(R.id.textView2);
         final TextView textView3=(TextView) findViewById(R.id.textView3);
         final SeekBar seekBar=(SeekBar) findViewById(R.id.seekBar);
@@ -62,7 +72,8 @@ public class Add_plan_Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_plan) {
-            Toast.makeText(Add_plan_Activity.this, "OK", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(Add_plan_Activity.this, "OK", Toast.LENGTH_SHORT).show();
+            //db.insert_tbl_plan_day();
             return true;
         }
 
