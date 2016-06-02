@@ -21,11 +21,11 @@ public class Db extends SQLiteOpenHelper {
 
         db.execSQL(
                 //"create table tbl_a (t_date varchar(20),t_nakh varchar(20),t_price varchar(20),t_day varchar(20),t_month varchar(20),t_dayW varchar(20),t_grop varchar(2))"
-                "CREATE TABLE tbl_plan_day (id BIGINT NOT NULL PRIMARY KEY AUTOINCREMENT, name VARCHAR(20) ,day	INT , activity INT, repet INT,date_create varchar(20)"
+                "create table tbl_plan_day (id INTEGER PRIMARY KEY AUTOINCREMENT, name varchar(20) ,day	int , activity int, repeat int,date_create varchar(20))"
         );
         db.execSQL(
                 //"create table tbl_b (t_date varchar(20),t_nakh varchar(20),dd varchar(5))"
-                "CREATE TABLE tbl_all_day (id bigint, time_start varchar(20), time_end varchar(20), num_day int,tag1 int,tag2 int, tag3 int,command varchar(200), notice int, notice_time varchar(20), notice_command varchar(20),notice_sound int,notice_vibrate int)"
+                "create table tbl_all_day (id int, time_start varchar(20), time_end varchar(20), num_day int,tag1 int,tag2 int, tag3 int,command varchar(200), notice int, notice_time varchar(20), notice_command varchar(20),notice_sound int,notice_vibrate int)"
         );
         Log.i("DATABASE IS CREATE", "oooooooooo");
     }
@@ -36,13 +36,13 @@ public class Db extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insert_tbl_plan_day (String plan_name,int plan_day,int plan_activity,String plan_date_create){
+    public boolean insert_tbl_plan_day (String plan_name,int plan_day,int plan_activity,int plan_repeat,String plan_date_create){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("name", plan_name);
         contentValues.put("day", plan_day);
         contentValues.put("activity", plan_activity);
-        contentValues.put("repet", plan_name);
+        contentValues.put("repeat", plan_repeat);
         contentValues.put("date_create", plan_date_create);
 
         db.insert("tbl_plan_day", null, contentValues);
@@ -220,11 +220,11 @@ public class Db extends SQLiteOpenHelper {
         String tt;
         int count=0;
         SQLiteDatabase oo = this.getReadableDatabase();
-        Cursor pa =  oo.rawQuery( "select * from tbl_wall", null );
+        Cursor pa =  oo.rawQuery( "select * from tbl_plan_day", null );
         String [] items = new String[pa.getCount()];
         if(pa.moveToFirst()){
             do{
-                String lis=pa.getString(0);
+                String lis=pa.getString(1);
                 items[count]=lis;
                 count++;
 
@@ -238,11 +238,11 @@ public class Db extends SQLiteOpenHelper {
         String tt;
         int count = 0;
         SQLiteDatabase oo = this.getReadableDatabase();
-        Cursor pa = oo.rawQuery("select * from tbl_b", null);
+        Cursor pa = oo.rawQuery("select * from tbl_plan_day", null);
         String[] items = new String[pa.getCount()];
         if (pa.moveToFirst()) {
             do {
-                String lis = pa.getString(0);
+                String lis = pa.getString(pa.getColumnIndex("name"));
                 items[count] = lis;
                 count++;
 

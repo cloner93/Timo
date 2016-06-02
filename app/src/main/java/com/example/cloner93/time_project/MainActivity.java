@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity
 
 
 
-<<<<<<< Updated upstream
+
     }
     public void selectFrag(View view) {
 
@@ -70,8 +70,6 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.replace(R.id.fragment_place, fr);
         fragmentTransaction.commit();
 
-=======
->>>>>>> Stashed changes
     }
 
     @Override

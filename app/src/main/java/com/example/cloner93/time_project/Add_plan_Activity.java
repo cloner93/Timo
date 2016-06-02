@@ -1,5 +1,6 @@
 package com.example.cloner93.time_project;
 
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 public class Add_plan_Activity extends AppCompatActivity {
 
     Db db;
+    String c;
+    int ch1;
+    int ch2;
     EditText editText;
     CheckBox checkBox1;
     CheckBox checkBox2;
@@ -27,6 +31,9 @@ public class Add_plan_Activity extends AppCompatActivity {
         checkBox1=(CheckBox)findViewById(R.id.checkBox);
         checkBox2=(CheckBox)findViewById(R.id.checkBox2);
         editText =(EditText) findViewById(R.id.editText);
+
+
+
         final TextView textView=(TextView) findViewById(R.id.textView2);
         final TextView textView3=(TextView) findViewById(R.id.textView3);
         final SeekBar seekBar=(SeekBar) findViewById(R.id.seekBar);
@@ -50,12 +57,7 @@ public class Add_plan_Activity extends AppCompatActivity {
             }
         });
         //String seekBarValue= (String) textView3.getText();  get seekbar value
-
     }
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -72,8 +74,15 @@ public class Add_plan_Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_plan) {
-            //Toast.makeText(Add_plan_Activity.this, "OK", Toast.LENGTH_SHORT).show();
-            //db.insert_tbl_plan_day();
+
+            if(!checkBox1.isChecked())
+                ch1=0;
+            else
+                ch2=1;
+            //Toast.makeText(Add_plan_Activity.this, c, Toast.LENGTH_SHORT).show();
+            db.insert_tbl_plan_day(editText.getText().toString(),7,ch1,ch2,"fff");
+            finish();
+            Toast.makeText(getApplicationContext(), "Down!", Toast.LENGTH_SHORT).show();
             return true;
         }
 

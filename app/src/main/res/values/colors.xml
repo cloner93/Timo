@@ -5,9 +5,7 @@
     <color name="textColorPrimary">#FFFFFF</color>
     <color name="windowBackground">#FFFFFF</color>
     <color name="navigationBarColor">#000000</color>
-<<<<<<< Updated upstream
     <color name="colorAccent">#4d82ff</color>
-=======
-    <color name="colorAccent">#c8e8ff</color>
+
 >>>>>>> Stashed changes
 </resources>
