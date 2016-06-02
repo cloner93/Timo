@@ -39,7 +39,5 @@ public class FragmentOne extends Fragment {
             ListAdapter asd= new SimpleAdapter(v.getContext(),pro,R.layout.listview_plan,new String[]{"name"},new int[]{R.id.secondLine});
             ag.setAdapter(asd);
         return v;
-
-
     }
 }

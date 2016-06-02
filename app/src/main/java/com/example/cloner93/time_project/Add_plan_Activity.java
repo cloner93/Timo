@@ -3,6 +3,7 @@ package com.example.cloner93.time_project;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,10 +14,19 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ghasemkiani.util.icu.PersianCalendar;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Add_plan_Activity extends AppCompatActivity {
 
     Db db;
-    String c;
+    PersianCalendar persianCalendar;
+
+    String time;
+    int seekBarValue;
     int ch1;
     int ch2;
     EditText editText;
@@ -31,11 +41,10 @@ public class Add_plan_Activity extends AppCompatActivity {
         checkBox1=(CheckBox)findViewById(R.id.checkBox);
         checkBox2=(CheckBox)findViewById(R.id.checkBox2);
         editText =(EditText) findViewById(R.id.editText);
-
-
+        persianCalendar = new PersianCalendar(new Date());
 
         final TextView textView=(TextView) findViewById(R.id.textView2);
-        final TextView textView3=(TextView) findViewById(R.id.textView3);
+         TextView textView3=(TextView) findViewById(R.id.textView3);
         final SeekBar seekBar=(SeekBar) findViewById(R.id.seekBar);
         textView.setText(seekBar.getProgress() + "/" + seekBar.getMax());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -52,11 +61,12 @@ public class Add_plan_Activity extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar  ) {
                 textView.setText(progress + "/" + seekBar.getMax());
-                textView3.setText(String.valueOf(progress));
+                seekBarValue=seekBar.getProgress();
 
             }
         });
-        //String seekBarValue= (String) textView3.getText();  get seekbar value
+
+
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -67,22 +77,32 @@ public class Add_plan_Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_save_plan) {
 
             if(!checkBox1.isChecked())
                 ch1=0;
             else
                 ch2=1;
-            //Toast.makeText(Add_plan_Activity.this, c, Toast.LENGTH_SHORT).show();
-            db.insert_tbl_plan_day(editText.getText().toString(),7,ch1,ch2,"fff");
-            finish();
-            Toast.makeText(getApplicationContext(), "Down!", Toast.LENGTH_SHORT).show();
+            /*
+            persianCalendar1.get(Calendar.YEAR)
+            persianCalendar1.get(Calendar.MONTH) + 1
+            persianCalendar1.get(Calendar.DAY_OF_MONTH)
+            persianCalendar1.get(Calendar.HOUR_OF_DAY)    HOUR_OF_DAY
+
+            persianCalendar1.get(Calendar.MINUTE)
+            persianCalendar1.get(Calendar.SECOND)
+            */
+            if((editText.getText().toString())=="" || seekBarValue==0)
+                Toast.makeText(Add_plan_Activity.this, "Full all value !!!", Toast.LENGTH_SHORT).show();
+            else {
+                time = String.valueOf(persianCalendar.get(Calendar.YEAR)) + " " + String.valueOf(persianCalendar.get(Calendar.MARCH) + 1) + " " + String.valueOf(persianCalendar.get(Calendar.DAY_OF_MONTH));
+                db.insert_tbl_plan_day(editText.getText().toString(), seekBarValue, ch1, ch2, time);
+                finish();
+                Toast.makeText(getApplicationContext(), "Down!", Toast.LENGTH_SHORT).show();
+            }
             return true;
         }
 
