@@ -7,15 +7,22 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Db extends SQLiteOpenHelper {
     ArrayList<HashMap<String,String>> projectlist;
+    ArrayList<HashMap<String, String>> data;
+
     public Db(Context context)
     {
         super(context, "DB.db", null, 1);
     }
+
+
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -102,38 +109,32 @@ public class Db extends SQLiteOpenHelper {
         return numRows;
     }
 
-    public Integer deltb1 (Integer id)
-    {
+    public Integer deltb1 (Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("tb2", "id=?", new String[]{Integer.toString(id)});
         return db.delete("tb1","id = ? ",new String[] { Integer.toString(id) });
     }
-    public Integer deltb2(Integer id)
-    {
+    public Integer deltb2(Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("tb2","idd = ? ", new String[] { Integer.toString(id) });
     }
 
 
-    public HashMap<String, String> getUserDetails() {
+    public HashMap<String, String> getUserDetails(String a) {
         HashMap<String, String> user = new HashMap<String, String>();
-        String selectQuery = "SELECT  * FROM  tbl_a" ;
+        String selectQuery = "SELECT * FROM tbl_plan_day where name='"+ a +"'";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         // Move to first row
         cursor.moveToFirst();
         if (cursor.getCount() > 0) {
-            user.put("t_date", cursor.getString(0));
-            user.put("t_nakh", cursor.getString(1));
-            user.put("t_price", cursor.getString(2));
-            user.put("t_day", cursor.getString(3));
-            user.put("t_month", cursor.getString(4));
-            user.put("t_dayW", cursor.getString(5));
-            user.put("t_grop", cursor.getString(6));
-
-
-
+            user.put("id", cursor.getString(0));
+            user.put("name", cursor.getString(1));
+            user.put("day", cursor.getString(2));
+            user.put("activity", cursor.getString(3));
+            user.put("repeat", cursor.getString(4));
+            user.put("date_create", cursor.getString(5));
         }
         cursor.close();
         db.close();
@@ -142,17 +143,26 @@ public class Db extends SQLiteOpenHelper {
 
         return user;
     }
-    public  int iso(String s){
-        String selectQuery = "SELECT  * FROM  tbl_b where dd="+s;
 
+    public String iso(String s){
+        String selectQuery = "SELECT  * FROM  tbl_plan_day where name="+s;
+        String empName = "";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if(cursor.getCount() > 0) {
+
+            cursor.moveToFirst();
+            empName = cursor.getString(cursor.getColumnIndex("EmployeeName"));
+        }
+
+            return empName;
         // Move to first row
-        cursor.moveToFirst();
+        /*cursor.moveToFirst();
         if (cursor.getCount() > 0) {
             return 0;
         }
-        return 1;
+        return 1;*/
     }
     public ArrayList<HashMap<String,String>> getaward() {
         HashMap<String, String> user = new HashMap<String, String>();
@@ -177,8 +187,7 @@ public class Db extends SQLiteOpenHelper {
 
         return projectlist;
     }
-    public ArrayList<String> getAllCotacts()
-    {
+    public ArrayList<String> getAllCotacts(){
         ArrayList<String> array_list = new ArrayList<String>();
 
         //hp = new HashMap();

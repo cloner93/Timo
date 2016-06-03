@@ -7,13 +7,10 @@ import android.view.ViewGroup;
 
 import com.example.cloner93.time_project.R;
 
-public class TabFragment1 extends Fragment {
+public class TabFragment6 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
-
-        return inflater.inflate(R.layout.tab_fragment1, container, false);
+        return inflater.inflate(R.layout.tab_fragment6, container, false);
     }
 }
