@@ -32,7 +32,7 @@ public class Db extends SQLiteOpenHelper {
         );
         db.execSQL(
                 //"create table tbl_b (t_date varchar(20),t_nakh varchar(20),dd varchar(5))"
-                "create table tbl_all_day (id int, time_start varchar(20), time_end varchar(20), num_day int,tag1 int,tag2 int, tag3 int,command varchar(200), notice int, notice_time varchar(20), notice_command varchar(20),notice_sound int,notice_vibrate int)"
+                "create table tbl_all_day (id int, date varchar(30),time_start varchar(20), time_end varchar(20), num_day int,tag1 int,tag2 int, tag3 int,command varchar(200), notice int, notice_time int,notice_time_no int, notice_comment varchar(20),notice_sound int,notice_vibrate int)"
         );
         Log.i("DATABASE IS CREATE", "oooooooooo");
     }
@@ -55,22 +55,24 @@ public class Db extends SQLiteOpenHelper {
         db.insert("tbl_plan_day", null, contentValues);
         return true;
     }
-    public boolean insert_tbl_all_day(int id,String time_start,String time_end,int num_day,int tag1,int tag2,int tag3,String comment,int notice,String notice_time,String notice_comment,int notice_sound,int notice_vibrte){
+    public boolean insert_tbl_all_day(String id,String date,String time_start,String time_end,int num_day,int tag1,int tag2,int tag3,String command,int notice,int notice_time,int notice_time_no,String notice_comment,int notice_sound,int notice_vibrate){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
+        contentValues.put("date", date);
         contentValues.put("time_start", time_start);
         contentValues.put("time_end", time_end);
         contentValues.put("num_day", num_day);
         contentValues.put("tag1", tag1);
         contentValues.put("tag2", tag2);
         contentValues.put("tag3", tag3);
-        contentValues.put("command", comment);
+        contentValues.put("command", command);
         contentValues.put("notice", notice);
         contentValues.put("notice_time", notice_time);
-        contentValues.put("notice_command", notice_comment);
+        contentValues.put("notice_time_no", notice_time_no);
+        contentValues.put("notice_comment", notice_comment);
         contentValues.put("notice_sound", notice_sound);
-        contentValues.put("notice_vibrate", notice_vibrte);
+        contentValues.put("notice_vibrate", notice_vibrate);
 
         db.insert("tbl_all_day", null, contentValues);
         return true;
@@ -108,7 +110,6 @@ public class Db extends SQLiteOpenHelper {
         int numRows = (int) DatabaseUtils.queryNumEntries(db, "tbl_wall");
         return numRows;
     }
-
     public Integer deltb1 (Integer id){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete("tb2", "id=?", new String[]{Integer.toString(id)});
@@ -118,8 +119,6 @@ public class Db extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("tb2","idd = ? ", new String[] { Integer.toString(id) });
     }
-
-
     public HashMap<String, String> getUserDetails(String a) {
         HashMap<String, String> user = new HashMap<String, String>();
         String selectQuery = "SELECT * FROM tbl_plan_day where name='"+ a +"'";
@@ -143,7 +142,6 @@ public class Db extends SQLiteOpenHelper {
 
         return user;
     }
-
     public String iso(String s){
         String selectQuery = "SELECT  * FROM  tbl_plan_day where name="+s;
         String empName = "";
@@ -287,5 +285,4 @@ public class Db extends SQLiteOpenHelper {
         cursor.close();
         return cnt;
     }
-
 }

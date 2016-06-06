@@ -79,9 +79,6 @@ public class FragmentOne extends Fragment {
                         intent.putExtra("date_create", date_create);
                         startActivity(intent);
 
-
-
-
                         //String ret = String.valueOf(db.getUserDetails(selected));
                         //Toast.makeText(getActivity(), ret, Toast.LENGTH_SHORT).show();
                         //db.getUserDetails(selected);

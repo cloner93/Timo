@@ -1,5 +1,6 @@
 package com.example.cloner93.time_project;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -24,13 +25,14 @@ public class Plan_day_Activity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-
+    int i=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan_day);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
 
         Bundle intent = getIntent().getExtras();
@@ -132,16 +134,20 @@ public class Plan_day_Activity extends AppCompatActivity {
             tabLayout.addTab(tabLayout.newTab().setText("Tab 10"));
         }
 
+        assert tabLayout != null;
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        assert viewPager != null;
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                 i=tab.getPosition()+1;
             }
 
             @Override
@@ -161,10 +167,13 @@ public class Plan_day_Activity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Snackbar.make(view, plan_id+"  "+day+" "+name+"   "+date_year+"/"+date_month+"/"+date_day , Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                //Snackbar.make(view,  , Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                /*Intent intent=new Intent(getApplicationContext(),Add_plan_day_Activity.class);
-                startActivity(intent);*/
+                Intent intent=new Intent(getApplicationContext(),Add_plan_day_Activity.class);
+
+                intent.putExtra("plan_id", plan_id);
+                intent.putExtra("day", String.valueOf(i));
+                intent.putExtra("date", String.valueOf(date_create));
+                Toast.makeText(getApplicationContext(),plan_id +"  "+i+"  "+date_create, Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
     }
@@ -172,9 +181,6 @@ public class Plan_day_Activity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
