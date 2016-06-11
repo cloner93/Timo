@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class Plan_day_Activity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    //public int tabb =0;
+
     int i=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class Plan_day_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_plan_day);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        values.tab_number =i;
 
 
 
@@ -44,8 +48,8 @@ public class Plan_day_Activity extends AppCompatActivity {
         final String date_create = intent.getString("date_create");
 
         int day_num = Integer.parseInt(day);
-
-
+        values.plan_day_id = Integer.parseInt(plan_id);
+        values.plan_day_num=Integer.parseInt(day);
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 
 
@@ -147,7 +151,9 @@ public class Plan_day_Activity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                 i=tab.getPosition()+1;
+                i=tab.getPosition()+1;
+                values.tab_number =i;
+                Log.e("***----->>"+String.valueOf(i),"tab");
             }
 
             @Override
@@ -172,7 +178,7 @@ public class Plan_day_Activity extends AppCompatActivity {
                 intent.putExtra("plan_id", plan_id);
                 intent.putExtra("day", String.valueOf(i));
                 intent.putExtra("date", String.valueOf(date_create));
-                Toast.makeText(getApplicationContext(),plan_id +"  "+i+"  "+date_create, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(),plan_id +"  "+i+"  "+date_create, Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });

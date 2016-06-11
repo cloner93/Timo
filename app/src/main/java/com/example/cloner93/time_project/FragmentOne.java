@@ -1,10 +1,7 @@
 package com.example.cloner93.time_project;
 import android.app.Fragment;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +25,11 @@ public class FragmentOne extends Fragment {
         final View v=inflater.inflate(R.layout.fragment_one, container, false);
                 v.findViewById(R.id.nav_camera);
 
-        txt=(CheckBox)v.findViewById(R.id.firstLine);
+        txt=(CheckBox)v.findViewById(R.id.time_start);
+        ListView ag=(ListView) v.findViewById(R.id.listView);
+
         final Db k=new Db(v.getContext());
         final String g[];
-        ListView ag=(ListView) v.findViewById(R.id.listView);
         ArrayList<HashMap<String,String>> pro;
         pro=new ArrayList<HashMap<String,String>>();
         g=k.getAll1();
@@ -43,7 +41,7 @@ public class FragmentOne extends Fragment {
                 pro.add(hashMap);
             }
 
-        ListAdapter asd= new SimpleAdapter(v.getContext(),pro,R.layout.listview_plan,new String[]{"name"},new int[]{R.id.firstLine});
+        ListAdapter asd= new SimpleAdapter(v.getContext(),pro,R.layout.listview_plan,new String[]{"name"},new int[]{R.id.time_start});
         ag.setAdapter(asd);
 
 
@@ -56,7 +54,7 @@ public class FragmentOne extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
                 //String te=String.valueOf(txt);
-                String selected = ((TextView) view.findViewById(R.id.firstLine)).getText().toString();
+                String selected = ((TextView) view.findViewById(R.id.time_start)).getText().toString();
                     try {
 
                             HashMap<String,String> puta;

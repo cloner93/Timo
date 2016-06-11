@@ -157,6 +157,8 @@ public class Add_plan_day_Activity extends AppCompatActivity {
             try {
                 db.insert_tbl_all_day(plan_id, String.valueOf(date), time_start, time_end, dayto, tag_1, tag_2, tag_3, editText2.getText().toString(), notice, notice_time, nitice_time_no, notice_comment, notice_sound, notice_vibrate);
                 Log.d("Database", "Adding to   <<<table tbl_all_day>>>");
+                finish();
+                Toast.makeText(getApplicationContext(), "Down!", Toast.LENGTH_SHORT).show();
             }
             catch (Exception e) {
                 Toast.makeText(Add_plan_day_Activity.this, "OK!!!", Toast.LENGTH_SHORT).show();
