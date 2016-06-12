@@ -3,7 +3,10 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -26,7 +29,7 @@ public class FragmentOne extends Fragment {
                 v.findViewById(R.id.nav_camera);
 
         txt=(CheckBox)v.findViewById(R.id.time_start);
-        ListView ag=(ListView) v.findViewById(R.id.listView);
+        final ListView ag=(ListView) v.findViewById(R.id.listView);
 
         final Db k=new Db(v.getContext());
         final String g[];
@@ -40,15 +43,17 @@ public class FragmentOne extends Fragment {
                 hashMap.put("name",g[i]);
                 pro.add(hashMap);
             }
-
         ListAdapter asd= new SimpleAdapter(v.getContext(),pro,R.layout.listview_plan,new String[]{"name"},new int[]{R.id.time_start});
         ag.setAdapter(asd);
-
-
-
-
-
-
+        registerForContextMenu(ag);
+        ag.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
+                // TODO Auto-generated method stub
+                Log.v("long clicked","pos: " + pos);
+                return true;
+            }
+        });
         ag.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -56,17 +61,14 @@ public class FragmentOne extends Fragment {
                 //String te=String.valueOf(txt);
                 String selected = ((TextView) view.findViewById(R.id.time_start)).getText().toString();
                     try {
-
-                            HashMap<String,String> puta;
+                        HashMap<String,String> puta;
                         puta=k.getUserDetails(String.valueOf(selected));
-
                         String plan_id=puta.get("id");
                         String day=puta.get("day");
                         String name=puta.get("name");
                         String activity=puta.get("activity");
                         String repeat=puta.get("repeat");
                         String date_create=puta.get("date_create");
-
 
                         Intent intent=new Intent(v.getContext(),Plan_day_Activity.class);
                         intent.putExtra("plan_id", plan_id);
@@ -91,5 +93,25 @@ public class FragmentOne extends Fragment {
 
 
         return v;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Select The Action");
+        menu.add(0, v.getId(), 0, "Call");//groupId, itemId, order, title
+        menu.add(0, v.getId(), 0, "SMS");
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        if(item.getTitle()=="Call"){
+            Toast.makeText(getContext(),"calling code",Toast.LENGTH_LONG).show();
+        }
+        else if(item.getTitle()=="SMS"){
+        }else{
+            return false;
+        }
+        return true;
     }
 }

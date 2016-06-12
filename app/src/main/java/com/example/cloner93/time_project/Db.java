@@ -241,8 +241,6 @@ public class Db extends SQLiteOpenHelper {
         return items;
     }
     public  String [] getAll1() {
-
-        String tt;
         int count = 0;
         SQLiteDatabase oo = this.getReadableDatabase();
         Cursor pa = oo.rawQuery("select * from tbl_plan_day", null);
