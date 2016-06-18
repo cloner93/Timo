@@ -1,7 +1,11 @@
 package com.example.cloner93.time_project;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +21,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class Add_plan_day_Activity extends AppCompatActivity {
     private TextView displayTime;
@@ -124,10 +129,10 @@ public class Add_plan_day_Activity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Bundle intent = getIntent().getExtras();
-        final String plan_id = intent.getString("plan_id");
-        final String day = intent.getString("day");
-        final String date = intent.getString("date");
+        Bundle intget = getIntent().getExtras();
+        final String plan_id = intget.getString("plan_id");
+        final String day = intget.getString("day");
+        final String date = intget.getString("date");
         int dayto=Integer.valueOf(day);
 
         if(tag1.isChecked())
@@ -157,6 +162,19 @@ public class Add_plan_day_Activity extends AppCompatActivity {
             try {
                 db.insert_tbl_all_day(plan_id, String.valueOf(date), time_start, time_end, dayto, tag_1, tag_2, tag_3, editText2.getText().toString(), notice, notice_time, nitice_time_no, notice_comment, notice_sound, notice_vibrate);
                 Log.d("Database", "Adding to   <<<table tbl_all_day>>>");
+
+                if(notice!=0) {
+                    AlarmReciever.comment=editText2.getText().toString();
+                    Intent i = new Intent(getApplicationContext(), AlarmReciever.class);
+                    PendingIntent operation = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
+                    AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+                    GregorianCalendar calendar = new GregorianCalendar(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH, pHour, pMinute+1);
+                    long alarm_time = calendar.getTimeInMillis();
+                    Log.e("Time & Date",String.valueOf(Calendar.YEAR)+"/"+String.valueOf(Calendar.MONTH)+"/"+String.valueOf(Calendar.DAY_OF_MONTH)+"   "+String.valueOf(Calendar.HOUR_OF_DAY)+":"+String.valueOf(Calendar.MINUTE));
+                    alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);
+                    Toast.makeText(getBaseContext(), "Alarm is set successfully", Toast.LENGTH_SHORT).show();
+                }
+
                 finish();
                 Toast.makeText(getApplicationContext(), "Down!", Toast.LENGTH_SHORT).show();
             }
@@ -168,4 +186,6 @@ public class Add_plan_day_Activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

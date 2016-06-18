@@ -28,9 +28,10 @@ public class TabFragment5 extends Fragment {
         ListView ag=(ListView) v.findViewById(R.id.listView4);
 
         final Db k = new Db(v.getContext());
-        final String g[], z[];
+        final String g[], z[],q[];
         g = k.getAll11(vid, 5);
         z = k.getAll12(vid, 5);
+        q = k.getAll13(vid, 5);
         Log.e("----->>" + String.valueOf(vid), "tab5 id");
         Log.e("----->>" + String.valueOf(vtab), "tab5 tab num");
         ArrayList<HashMap<String, String>> get;
@@ -41,9 +42,10 @@ public class TabFragment5 extends Fragment {
                 HashMap<String, String> get2 = new HashMap<>();
                 get2.put("y", g[i]);
                 get2.put("s", z[i]);
+                get2.put("w", q[i]);
                 get.add(get2);
             }
-            ListAdapter liasatp = new SimpleAdapter(v.getContext(), get, R.layout.listview_day, new String[]{"y", "s"}, new int[]{R.id.time_start, R.id.time_end});
+            ListAdapter liasatp = new SimpleAdapter(v.getContext(), get, R.layout.listview_day, new String[]{"y", "s", "w"}, new int[]{R.id.time_start, R.id.time_end, R.id.day_command});
             ag.setAdapter(liasatp);
         }
 

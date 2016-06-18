@@ -240,6 +240,7 @@ public class Db extends SQLiteOpenHelper {
 
         return items;
     }
+
     public  String [] getAll1() {
         int count = 0;
         SQLiteDatabase oo = this.getReadableDatabase();
@@ -248,6 +249,23 @@ public class Db extends SQLiteOpenHelper {
         if (pa.moveToFirst()) {
             do {
                 String lis = pa.getString(pa.getColumnIndex("name"));
+                items[count] = lis;
+                count++;
+
+            } while (pa.moveToNext());
+            pa.close();
+        }
+
+        return items;
+    }
+    public  String [] getAll1_2() {
+        int count = 0;
+        SQLiteDatabase oo = this.getReadableDatabase();
+        Cursor pa = oo.rawQuery("select * from tbl_plan_day", null);
+        String[] items = new String[pa.getCount()];
+        if (pa.moveToFirst()) {
+            do {
+                String lis = pa.getString(pa.getColumnIndex("day"));
                 items[count] = lis;
                 count++;
 
@@ -284,6 +302,24 @@ public class Db extends SQLiteOpenHelper {
         if (pa.moveToFirst()) {
             do {
                 String lis = pa.getString(pa.getColumnIndex("time_end"));
+                items[count] = lis;
+                count++;
+
+            } while (pa.moveToNext());
+            pa.close();
+        }
+
+        return items;
+    }
+    public  String [] getAll13(int plan_id,int day) {
+        String tt;
+        int count = 0;
+        SQLiteDatabase oo = this.getReadableDatabase();
+        Cursor pa = oo.rawQuery("select * from tbl_all_day where id="+plan_id+" AND num_day="+day, null);
+        String[] items = new String[pa.getCount()];
+        if (pa.moveToFirst()) {
+            do {
+                String lis = pa.getString(pa.getColumnIndex("command"));
                 items[count] = lis;
                 count++;
 

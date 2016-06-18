@@ -32,18 +32,20 @@ public class FragmentOne extends Fragment {
         final ListView ag=(ListView) v.findViewById(R.id.listView);
 
         final Db k=new Db(v.getContext());
-        final String g[];
+        final String g[],q[];
         ArrayList<HashMap<String,String>> pro;
         pro=new ArrayList<HashMap<String,String>>();
         g=k.getAll1();
+        q=k.getAll1_2();
 
         for(int i=0;i<g.length;i++)
             {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("name",g[i]);
+                hashMap.put("day",q[i]);
                 pro.add(hashMap);
             }
-        ListAdapter asd= new SimpleAdapter(v.getContext(),pro,R.layout.listview_plan,new String[]{"name"},new int[]{R.id.time_start});
+        ListAdapter asd= new SimpleAdapter(v.getContext(),pro,R.layout.listview_plan,new String[]{"name","day"},new int[]{R.id.time_start,R.id.secondLine});
         ag.setAdapter(asd);
         registerForContextMenu(ag);
         ag.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -95,23 +97,4 @@ public class FragmentOne extends Fragment {
         return v;
     }
 
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
-    {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Select The Action");
-        menu.add(0, v.getId(), 0, "Call");//groupId, itemId, order, title
-        menu.add(0, v.getId(), 0, "SMS");
-    }
-    @Override
-    public boolean onContextItemSelected(MenuItem item){
-        if(item.getTitle()=="Call"){
-            Toast.makeText(getContext(),"calling code",Toast.LENGTH_LONG).show();
-        }
-        else if(item.getTitle()=="SMS"){
-        }else{
-            return false;
-        }
-        return true;
-    }
 }
