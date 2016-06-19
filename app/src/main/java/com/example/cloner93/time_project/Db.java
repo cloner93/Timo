@@ -20,9 +20,6 @@ public class Db extends SQLiteOpenHelper {
     {
         super(context, "DB.db", null, 1);
     }
-
-
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -32,7 +29,7 @@ public class Db extends SQLiteOpenHelper {
         );
         db.execSQL(
                 //"create table tbl_b (t_date varchar(20),t_nakh varchar(20),dd varchar(5))"
-                "create table tbl_all_day (id int, time_start varchar(20), time_end varchar(20), num_day int,tag1 int,tag2 int, tag3 int,command varchar(200), notice int, notice_time varchar(20), notice_command varchar(20),notice_sound int,notice_vibrate int)"
+                "create table tbl_all_day (id int, date varchar(30),time_start varchar(20), time_end varchar(20), num_day int,tag1 int,tag2 int, tag3 int,command varchar(200), notice int, notice_time int,notice_time_no int, notice_comment varchar(20),notice_sound int,notice_vibrate int)"
         );
         Log.i("DATABASE IS CREATE", "oooooooooo");
     }
@@ -55,22 +52,24 @@ public class Db extends SQLiteOpenHelper {
         db.insert("tbl_plan_day", null, contentValues);
         return true;
     }
-    public boolean insert_tbl_all_day(int id,String time_start,String time_end,int num_day,int tag1,int tag2,int tag3,String comment,int notice,String notice_time,String notice_comment,int notice_sound,int notice_vibrte){
+    public boolean insert_tbl_all_day(String id,String date,String time_start,String time_end,int num_day,int tag1,int tag2,int tag3,String command,int notice,int notice_time,int notice_time_no,String notice_comment,int notice_sound,int notice_vibrate){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("id", id);
+        contentValues.put("date", date);
         contentValues.put("time_start", time_start);
         contentValues.put("time_end", time_end);
         contentValues.put("num_day", num_day);
         contentValues.put("tag1", tag1);
         contentValues.put("tag2", tag2);
         contentValues.put("tag3", tag3);
-        contentValues.put("command", comment);
+        contentValues.put("command", command);
         contentValues.put("notice", notice);
         contentValues.put("notice_time", notice_time);
-        contentValues.put("notice_command", notice_comment);
+        contentValues.put("notice_time_no", notice_time_no);
+        contentValues.put("notice_comment", notice_comment);
         contentValues.put("notice_sound", notice_sound);
-        contentValues.put("notice_vibrate", notice_vibrte);
+        contentValues.put("notice_vibrate", notice_vibrate);
 
         db.insert("tbl_all_day", null, contentValues);
         return true;
@@ -118,8 +117,6 @@ public class Db extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("tb2","idd = ? ", new String[] { Integer.toString(id) });
     }
-
-
     public HashMap<String, String> getUserDetails(String a) {
         HashMap<String, String> user = new HashMap<String, String>();
         String selectQuery = "SELECT * FROM tbl_plan_day where name='"+ a +"'";
@@ -143,7 +140,6 @@ public class Db extends SQLiteOpenHelper {
 
         return user;
     }
-
     public String iso(String s){
         String selectQuery = "SELECT  * FROM  tbl_plan_day where name="+s;
         String empName = "";
@@ -164,9 +160,10 @@ public class Db extends SQLiteOpenHelper {
         }
         return 1;*/
     }
+
     public ArrayList<HashMap<String,String>> getaward() {
         HashMap<String, String> user = new HashMap<String, String>();
-        String selectQuery = "SELECT  * FROM  tbl_b" ;
+        String selectQuery = "SELECT  * FROM  tbl_all_day" ;
         projectlist=new ArrayList<HashMap<String,String>>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -243,8 +240,8 @@ public class Db extends SQLiteOpenHelper {
 
         return items;
     }
+
     public  String [] getAll1() {
-        String tt;
         int count = 0;
         SQLiteDatabase oo = this.getReadableDatabase();
         Cursor pa = oo.rawQuery("select * from tbl_plan_day", null);
@@ -261,15 +258,68 @@ public class Db extends SQLiteOpenHelper {
 
         return items;
     }
-    public  String [] getAll11() {
-        String tt;
+    public  String [] getAll1_2() {
         int count = 0;
         SQLiteDatabase oo = this.getReadableDatabase();
-        Cursor pa = oo.rawQuery("select * from tbl_b", null);
+        Cursor pa = oo.rawQuery("select * from tbl_plan_day", null);
         String[] items = new String[pa.getCount()];
         if (pa.moveToFirst()) {
             do {
-                String lis = pa.getString(1);
+                String lis = pa.getString(pa.getColumnIndex("day"));
+                items[count] = lis;
+                count++;
+
+            } while (pa.moveToNext());
+            pa.close();
+        }
+
+        return items;
+    }
+    public  String [] getAll11(int plan_id,int day) {
+        String tt;
+        int count = 0;
+        SQLiteDatabase oo = this.getReadableDatabase();
+        Cursor pa = oo.rawQuery("select * from tbl_all_day where id="+plan_id+" AND num_day="+day, null);
+        String[] items = new String[pa.getCount()];
+        if (pa.moveToFirst()) {
+            do {
+                String lis = pa.getString(pa.getColumnIndex("time_start"));
+                items[count] = lis;
+                count++;
+
+            } while (pa.moveToNext());
+            pa.close();
+        }
+
+        return items;
+    }
+    public  String [] getAll12(int plan_id,int day) {
+        String tt;
+        int count = 0;
+        SQLiteDatabase oo = this.getReadableDatabase();
+        Cursor pa = oo.rawQuery("select * from tbl_all_day where id="+plan_id+" AND num_day="+day, null);
+        String[] items = new String[pa.getCount()];
+        if (pa.moveToFirst()) {
+            do {
+                String lis = pa.getString(pa.getColumnIndex("time_end"));
+                items[count] = lis;
+                count++;
+
+            } while (pa.moveToNext());
+            pa.close();
+        }
+
+        return items;
+    }
+    public  String [] getAll13(int plan_id,int day) {
+        String tt;
+        int count = 0;
+        SQLiteDatabase oo = this.getReadableDatabase();
+        Cursor pa = oo.rawQuery("select * from tbl_all_day where id="+plan_id+" AND num_day="+day, null);
+        String[] items = new String[pa.getCount()];
+        if (pa.moveToFirst()) {
+            do {
+                String lis = pa.getString(pa.getColumnIndex("command"));
                 items[count] = lis;
                 count++;
 
@@ -287,5 +337,4 @@ public class Db extends SQLiteOpenHelper {
         cursor.close();
         return cnt;
     }
-
 }

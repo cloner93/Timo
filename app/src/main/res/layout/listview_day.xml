@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip" >
+
+
+
+    <TextView
+        android:id="@+id/time_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time End"
+        android:layout_alignBottom="@+id/time_start"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/time_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time Start"
+        android:textSize="16sp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Text"
+        android:textSize="14sp"
+        android:id="@+id/day_command"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/time_end"
+        android:layout_alignEnd="@+id/time_end"
+        android:layout_alignLeft="@+id/time_start"
+        android:layout_alignStart="@+id/time_start" />
+
+</RelativeLayout>

@@ -19,6 +19,7 @@ import com.ghasemkiani.util.icu.PersianCalendar;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class Add_plan_Activity extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class Add_plan_Activity extends AppCompatActivity {
     int seekBarValue;
     int ch1;
     int ch2;
-    EditText editText;
+    private EditText editText;
     CheckBox checkBox1;
     CheckBox checkBox2;
     @Override
@@ -46,6 +47,8 @@ public class Add_plan_Activity extends AppCompatActivity {
         final TextView textView=(TextView) findViewById(R.id.textView2);
          TextView textView3=(TextView) findViewById(R.id.textView3);
         final SeekBar seekBar=(SeekBar) findViewById(R.id.seekBar);
+        assert textView != null;
+        assert seekBar != null;
         textView.setText(seekBar.getProgress() + "/" + seekBar.getMax());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progress = 0;
@@ -95,10 +98,10 @@ public class Add_plan_Activity extends AppCompatActivity {
             persianCalendar1.get(Calendar.MINUTE)
             persianCalendar1.get(Calendar.SECOND)
             */
-            if((editText.getText().toString())=="" || seekBarValue==0)
+            if(Objects.equals(editText.getText().toString(), "") || seekBarValue==0)
                 Toast.makeText(Add_plan_Activity.this, "Full all value !!!", Toast.LENGTH_SHORT).show();
             else {
-                time = String.valueOf(persianCalendar.get(Calendar.YEAR)) + " " + String.valueOf(persianCalendar.get(Calendar.MARCH) + 1) + " " + String.valueOf(persianCalendar.get(Calendar.DAY_OF_MONTH));
+                time = String.valueOf(persianCalendar.get(Calendar.YEAR)) + "/" + String.valueOf(persianCalendar.get(Calendar.MARCH) + 1) + "/" + String.valueOf(persianCalendar.get(Calendar.DAY_OF_MONTH));
                 db.insert_tbl_plan_day(editText.getText().toString(), seekBarValue, ch1, ch2, time);
                 finish();
                 Toast.makeText(getApplicationContext(), "Down!", Toast.LENGTH_SHORT).show();
