@@ -22,7 +22,7 @@ public class AlarmReciever extends BroadcastReceiver {
         // TODO Auto-generated method stub
 
         Log.e("onReceive", "Alarm down!!!");
-        Toast.makeText(context, "OnReceive alarm test", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, comment, Toast.LENGTH_SHORT).show();
 
         NotificationCompat.Builder mBuilder =new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.ic_notifications_active)

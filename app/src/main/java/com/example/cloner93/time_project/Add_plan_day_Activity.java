@@ -33,6 +33,8 @@ public class Add_plan_day_Activity extends AppCompatActivity {
 
     private int pHour;
     private int pMinute;
+    private static int pHour3=0;
+    private static int pMinute3=0;
     private int pHour2=0;
     private int pMinute2=0;
     private int tag_1;
@@ -87,6 +89,8 @@ public class Add_plan_day_Activity extends AppCompatActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             pHour = hourOfDay;
             pMinute = minute;
+            pHour3 = hourOfDay;
+            pMinute3 = minute;
             updateDisplay();
         }
     };
@@ -168,7 +172,7 @@ public class Add_plan_day_Activity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), AlarmReciever.class);
                     PendingIntent operation = PendingIntent.getBroadcast(getApplicationContext(), 0, i, 0);
                     AlarmManager alarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
-                    GregorianCalendar calendar = new GregorianCalendar(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH, pHour, pMinute+1);
+                    GregorianCalendar calendar = new GregorianCalendar(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH, pHour3, pMinute3);
                     long alarm_time = calendar.getTimeInMillis();
                     Log.e("Time & Date",String.valueOf(Calendar.YEAR)+"/"+String.valueOf(Calendar.MONTH)+"/"+String.valueOf(Calendar.DAY_OF_MONTH)+"   "+String.valueOf(Calendar.HOUR_OF_DAY)+":"+String.valueOf(Calendar.MINUTE));
                     alarmManager.set(AlarmManager.RTC_WAKEUP, alarm_time, operation);

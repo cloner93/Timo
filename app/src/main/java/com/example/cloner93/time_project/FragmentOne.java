@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -28,16 +30,15 @@ public class FragmentOne extends Fragment {
         final View v=inflater.inflate(R.layout.fragment_one, container, false);
                 v.findViewById(R.id.nav_camera);
 
-        txt=(CheckBox)v.findViewById(R.id.time_start);
-        final ListView ag=(ListView) v.findViewById(R.id.listView);
 
+        final ListView ag=(ListView) v.findViewById(R.id.listView);
+        ImageView emptyimg = (ImageView)v.findViewById(R.id.imageView3);
         final Db k=new Db(v.getContext());
         final String g[],q[];
         ArrayList<HashMap<String,String>> pro;
         pro=new ArrayList<HashMap<String,String>>();
         g=k.getAll1();
         q=k.getAll1_2();
-
         for(int i=0;i<g.length;i++)
             {
                 HashMap<String, String> hashMap = new HashMap<>();
@@ -47,7 +48,19 @@ public class FragmentOne extends Fragment {
             }
         ListAdapter asd= new SimpleAdapter(v.getContext(),pro,R.layout.listview_plan,new String[]{"name","day"},new int[]{R.id.time_start,R.id.secondLine});
         ag.setAdapter(asd);
-        registerForContextMenu(ag);
+        if(asd.isEmpty())
+        {
+            Log.e("Empty", "Listview is empty");
+            emptyimg.setVisibility(View.VISIBLE);
+            ag.setVisibility(View.INVISIBLE);
+        }
+        else{
+            Log.e("Empty","Listview NOT is empty");
+            emptyimg.setVisibility(View.INVISIBLE);
+            ag.setVisibility(View.VISIBLE);
+        }
+
+            registerForContextMenu(ag);
         ag.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
@@ -81,9 +94,6 @@ public class FragmentOne extends Fragment {
                         intent.putExtra("date_create", date_create);
                         startActivity(intent);
 
-                        //String ret = String.valueOf(db.getUserDetails(selected));
-                        //Toast.makeText(getActivity(), ret, Toast.LENGTH_SHORT).show();
-                        //db.getUserDetails(selected);
                         Log.i("fragment one", "Get Plan day DOWN!!!!");
                     }
                     catch (Exception e){
@@ -93,8 +103,43 @@ public class FragmentOne extends Fragment {
 
         });
 
-
         return v;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("onResume", "onResume");
 
+
+
+
+        final ListView ag=(ListView) getActivity().findViewById(R.id.listView);
+        ImageView emptyimg = (ImageView)getActivity().findViewById(R.id.imageView3);
+        final Db k=new Db(getActivity().getApplicationContext());
+        final String g[],q[];
+        ArrayList<HashMap<String,String>> pro;
+        pro=new ArrayList<HashMap<String,String>>();
+        g=k.getAll1();
+        q=k.getAll1_2();
+        for(int i=0;i<g.length;i++)
+        {
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("name",g[i]);
+            hashMap.put("day",q[i]);
+            pro.add(hashMap);
+        }
+        ListAdapter asd= new SimpleAdapter(getActivity().getApplicationContext(),pro,R.layout.listview_plan,new String[]{"name","day"},new int[]{R.id.time_start,R.id.secondLine});
+        ag.setAdapter(asd);
+       if(asd.isEmpty())
+       {
+           Log.e("Empty", "Listview is empty");
+           emptyimg.setVisibility(View.VISIBLE);
+           ag.setVisibility(View.INVISIBLE);
+       }
+       else{
+        Log.e("Empty","Listview NOT is empty");
+        emptyimg.setVisibility(View.INVISIBLE);
+        ag.setVisibility(View.VISIBLE);
+        }
+    }
 }

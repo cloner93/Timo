@@ -15,10 +15,19 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_add" />
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="309dp"
+        android:id="@+id/imageView3"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:src="@drawable/ic_back" />
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="550dp"
+        android:layout_height="485dp"
         android:id="@+id/listView"
-        android:layout_gravity="center" />
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="visible" />
+
+
 </FrameLayout>

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -20,7 +21,7 @@ public class TabFragment10 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v=inflater.inflate(R.layout.tab_fragment10, container, false);
 
-
+        ImageView emptyimg = (ImageView)v.findViewById(R.id.imageView13);
         int vid=values.plan_day_id;
         int vtab=values.tab_number;
         int vday=values.plan_day_num;
@@ -47,11 +48,62 @@ public class TabFragment10 extends Fragment {
             }
             ListAdapter liasatp = new SimpleAdapter(v.getContext(), get, R.layout.listview_day, new String[]{"y", "s", "w"}, new int[]{R.id.time_start, R.id.time_end, R.id.day_command});
             ag.setAdapter(liasatp);
+            Log.e("Empty","Listview NOT is empty");
+            emptyimg.setVisibility(View.INVISIBLE);
+            ag.setVisibility(View.VISIBLE);
         }
-
+        else
+        {
+            Log.e("Empty", "Listview is empty");
+            emptyimg.setVisibility(View.VISIBLE);
+            ag.setVisibility(View.INVISIBLE);
+        }
 
         return v;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.i("onResume", "onResume");
 
+        ImageView emptyimg = (ImageView)getActivity().findViewById(R.id.imageView12);
+        int vid=values.plan_day_id;
+        int vtab=values.tab_number;
+        int vday=values.plan_day_num;
+
+        ListView ag=(ListView) getActivity().findViewById(R.id.listView11);
+
+
+        final Db k = new Db(getActivity().getApplicationContext());
+        final String g[], z[],q[];
+        g = k.getAll11(vid, 10);
+        z = k.getAll12(vid, 10);
+        q = k.getAll13(vid, 10);
+        Log.e("----->>" + String.valueOf(vid), "tab10 id");
+        Log.e("----->>" + String.valueOf(vtab), "tab10 tab num");
+        ArrayList<HashMap<String, String>> get;
+        get = new ArrayList<>();
+        if(g.length!=0)
+        {
+            for (int i = 0; i < g.length; i++) {
+                HashMap<String, String> get2 = new HashMap<>();
+                get2.put("y", g[i]);
+                get2.put("s", z[i]);
+                get2.put("w", q[i]);
+                get.add(get2);
+            }
+            ListAdapter liasatp = new SimpleAdapter(getActivity().getApplicationContext(), get, R.layout.listview_day, new String[]{"y", "s", "w"}, new int[]{R.id.time_start, R.id.time_end, R.id.day_command});
+            ag.setAdapter(liasatp);
+            Log.e("Empty","Listview NOT is empty");
+            emptyimg.setVisibility(View.INVISIBLE);
+            ag.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            Log.e("Empty", "Listview is empty");
+            emptyimg.setVisibility(View.VISIBLE);
+            ag.setVisibility(View.INVISIBLE);
+        }
+    }
 
 }
