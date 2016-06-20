@@ -6,8 +6,6 @@
     android:fillViewport="true"
     android:scrollbars="none" >
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -77,36 +75,43 @@
         android:layout_alignLeft="@+id/textView6"
         android:layout_alignStart="@+id/textView6" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tag 1"
-        android:id="@+id/checkBox3"
-        android:checked="false"
-        android:layout_centerVertical="true"
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center|left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/editText2"
         android:layout_alignLeft="@+id/editText2"
-        android:layout_alignStart="@+id/editText2" />
+        android:layout_alignStart="@+id/editText2"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignEnd="@+id/editText2"
+        android:layout_marginTop="26dp">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tag 2"
-        android:id="@+id/checkBox4"
-        android:checked="false"
-        android:layout_below="@+id/checkBox3"
-        android:layout_alignLeft="@+id/editText2" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 1"
+            android:id="@+id/checkBox3"
+            android:checked="false"
+            android:layout_marginTop="26dp" />
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tag 3"
-        android:id="@+id/checkBox5"
-        android:checked="false"
-        android:layout_below="@+id/checkBox4"
-        android:layout_alignLeft="@+id/editText2" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 2"
+            android:id="@+id/checkBox4"
+            android:checked="false"/>
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tag 3"
+            android:id="@+id/checkBox5"
+            android:checked="false"
+            />
+    </LinearLayout>
 
 </RelativeLayout>
 
-    </LinearLayout>
+
 </ScrollView>
