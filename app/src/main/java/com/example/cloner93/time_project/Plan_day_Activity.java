@@ -55,87 +55,87 @@ public class Plan_day_Activity extends AppCompatActivity {
 
         if(Objects.equals(day, "1")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+            tabLayout.addTab(tabLayout.newTab().setText("Day 1"));
         }else if(Objects.equals(day, "2")) {
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+            tabLayout.addTab(tabLayout.newTab().setText("Day 1"));
+            tabLayout.addTab(tabLayout.newTab().setText("Day 2"));
 
         }else if(Objects.equals(day, "3")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+            tabLayout.addTab(tabLayout.newTab().setText("Day 1"));
+            tabLayout.addTab(tabLayout.newTab().setText("Day 2"));
+            tabLayout.addTab(tabLayout.newTab().setText("Day 3"));
 
         }else if(Objects.equals(day, "4")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
+            tabLayout.addTab(tabLayout.newTab().setText("1"));
+            tabLayout.addTab(tabLayout.newTab().setText("2"));
+            tabLayout.addTab(tabLayout.newTab().setText("3"));
+            tabLayout.addTab(tabLayout.newTab().setText("4"));
 
         }else if (Objects.equals(day, "5")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 5"));
+            tabLayout.addTab(tabLayout.newTab().setText("1"));
+            tabLayout.addTab(tabLayout.newTab().setText("2"));
+            tabLayout.addTab(tabLayout.newTab().setText("3"));
+            tabLayout.addTab(tabLayout.newTab().setText("4"));
+            tabLayout.addTab(tabLayout.newTab().setText("5"));
 
         }else if (Objects.equals(day, "6")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 5"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 6"));
+            tabLayout.addTab(tabLayout.newTab().setText("1"));
+            tabLayout.addTab(tabLayout.newTab().setText("2"));
+            tabLayout.addTab(tabLayout.newTab().setText("3"));
+            tabLayout.addTab(tabLayout.newTab().setText("4"));
+            tabLayout.addTab(tabLayout.newTab().setText("5"));
+            tabLayout.addTab(tabLayout.newTab().setText("6"));
 
         }else if (Objects.equals(day, "7")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 5"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 6"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 7"));
+            tabLayout.addTab(tabLayout.newTab().setText("1"));
+            tabLayout.addTab(tabLayout.newTab().setText("2"));
+            tabLayout.addTab(tabLayout.newTab().setText("3"));
+            tabLayout.addTab(tabLayout.newTab().setText("4"));
+            tabLayout.addTab(tabLayout.newTab().setText("5"));
+            tabLayout.addTab(tabLayout.newTab().setText("6"));
+            tabLayout.addTab(tabLayout.newTab().setText("7"));
 
         }else if (Objects.equals(day, "8")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 5"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 6"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 7"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 8"));
+            tabLayout.addTab(tabLayout.newTab().setText("1"));
+            tabLayout.addTab(tabLayout.newTab().setText("2"));
+            tabLayout.addTab(tabLayout.newTab().setText("3"));
+            tabLayout.addTab(tabLayout.newTab().setText("4"));
+            tabLayout.addTab(tabLayout.newTab().setText("5"));
+            tabLayout.addTab(tabLayout.newTab().setText("6"));
+            tabLayout.addTab(tabLayout.newTab().setText("7"));
+            tabLayout.addTab(tabLayout.newTab().setText("8"));
 
         }else if (Objects.equals(day, "9")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 5"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 6"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 7"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 8"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 9"));
+            tabLayout.addTab(tabLayout.newTab().setText("1"));
+            tabLayout.addTab(tabLayout.newTab().setText("2"));
+            tabLayout.addTab(tabLayout.newTab().setText("3"));
+            tabLayout.addTab(tabLayout.newTab().setText("4"));
+            tabLayout.addTab(tabLayout.newTab().setText("5"));
+            tabLayout.addTab(tabLayout.newTab().setText("6"));
+            tabLayout.addTab(tabLayout.newTab().setText("7"));
+            tabLayout.addTab(tabLayout.newTab().setText("8"));
+            tabLayout.addTab(tabLayout.newTab().setText("9"));
 
         }else if (Objects.equals(day, "10")){
             assert tabLayout != null;
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 4"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 5"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 6"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 7"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 8"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 9"));
-            tabLayout.addTab(tabLayout.newTab().setText("Tab 10"));
+            tabLayout.addTab(tabLayout.newTab().setText("1"));
+            tabLayout.addTab(tabLayout.newTab().setText("2"));
+            tabLayout.addTab(tabLayout.newTab().setText("3"));
+            tabLayout.addTab(tabLayout.newTab().setText("4"));
+            tabLayout.addTab(tabLayout.newTab().setText("5"));
+            tabLayout.addTab(tabLayout.newTab().setText("6"));
+            tabLayout.addTab(tabLayout.newTab().setText("7"));
+            tabLayout.addTab(tabLayout.newTab().setText("8"));
+            tabLayout.addTab(tabLayout.newTab().setText("9"));
+            tabLayout.addTab(tabLayout.newTab().setText("10"));
         }
 
         assert tabLayout != null;
